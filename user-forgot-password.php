@@ -21,7 +21,7 @@ if(isset($_POST['send']))
                 $subject = "Resetare parolă cont Casa Thea";
                 $message = 'Dragă utilizator,';
                 $message .= '<br><br>Ai solicitat resetarea parolei pentru contul tău de pe site-ul nostru. Pentru a-ți reseta parola, te rugăm să urmezi link-ul de mai jos:';
-                $message .= '<br><br><a href="http://localhost/hotel/reset_password.php?email=' . $email .'&amp;activation_code='.$activation_code.'">Link resetare parola</a>';
+                $message .= '<br><br><a href="https://casathea.000webhostapp.com//reset_password.php?email=' . $email .'&amp;activation_code='.$activation_code.'">Link resetare parola</a>';
                 $message .= '<br><br>Link-ul va fi valabil timp de 24 de ore. Dacă nu dorești să îți resetezi parola, te rugăm să ignori acest email.';
                 $message .= '<br><br>Cu stima,';
                 $message .= '<br>Echipa Casa Thea';
