@@ -26,15 +26,14 @@ $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
 
-$_SESSION['msg'] = "Contul dumneavoastra a fost inregistrat. Pentru activarea contului verificati-va e-mailul.";
-header('location:index.php');
+
 
                 // TRIMITERE  EMAIL 
                     $subject = "Activarea cont Casa Thea";
                     $message = "Contul dumneavoastra a fos creat.";
                     $message = 'Dragă '.$nume.',';
                     $message .= '<br><br>Îți mulțumim pentru crearea unui cont pe site-ul nostru! Pentru a-ți activa contul, te rugăm să apeși pe link-ul de mai jos:';
-                    $message .= '<br><br><a href="http://localhost/hotel/activare.php?email=' . $email .'&amp;activation_code='.$activation_code.'">Link activare cont</a>';
+                    $message .= '<br><br><a href="https://casathea.000webhostapp.com/activare.php?email=' . $email .'&amp;activation_code='.$activation_code.'">Link activare cont</a>';
                     $message .= '<br><br>După activare, vei putea să îți configurezi profilul și să începi să utilizezi site-ul nostru.';
                     $message .= '<br><br>Dacă nu ai creat acest cont, te rugăm să ignori acest email.';
                     $message .= '<br><br>Cu stima,';
@@ -44,7 +43,9 @@ header('location:index.php');
                     $headers .= 'From: noreplay@casathea.ro' . "\r\n";
 
                     if (mail($email, $subject, $message, $headers)) {
-                        echo "<script>alert('Email-ul a fost trimis cu succes.');</script>";
+                        $_SESSION['msg'] = "Contul dumneavoastra a fost inregistrat. Pentru activarea contului verificati adresa de e-mail.";
+                        header('location:index.php');
+                        exit();
                     } else {
                         echo "<script>alert('Eroare la trimiterea email-ului.');</script>";
                     }
