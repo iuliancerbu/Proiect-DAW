@@ -40,28 +40,29 @@ else{?>
     <div class="row">
 
 <div class="col-md-3 col-sm-3 col-xs-6">
+<a href="lista-rezervari.php">    
 <div class="alert alert-success back-widget-set text-center">
-<i class="fa fa-book fa-5x"></i>
+<i class="fa-solid fa-calendar-days fa-5x"></i>
 <?php 
-$sql ="SELECT id from tblproceduri ";
+$sql ="SELECT Id from tblrezervari ";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $listdbooks=$query->rowCount();
 ?>
-
-
 <h3><?php echo htmlentities($listdbooks);?></h3>
-Proceduri
+REZERVARI
 </div>
+</a>
 </div>
 
 
 <div class="col-md-3 col-sm-3 col-xs-6">
+<a href="lista-facturi.php">
 <div class="alert alert-info back-widget-set text-center">
-<i class="fa fa-file-lines fa-5x"></i>
+<i class="fa-solid fa-file-invoice fa-5x"></i>
 <?php 
-$sql1 ="SELECT id from tbldocumente ";
+$sql1 ="SELECT Id from tblfacturi ";
 $query1 = $dbh -> prepare($sql1);
 $query1->execute();
 $results1=$query1->fetchAll(PDO::FETCH_OBJ);
@@ -69,42 +70,47 @@ $documentepublicate=$query1->rowCount();
 ?>
 
 <h3><?php echo htmlentities($documentepublicate);?> </h3>
-Documente
+FACTURI EMISE
 </div>
+</a>
 </div>
              
 
 <div class="col-md-3 col-sm-3 col-xs-6">
+<a href="lista-utilizatori.php">
 <div class="alert alert-danger back-widget-set text-center">
 <i class="fa fa-users fa-5x"></i>
 <?php 
-$sql3 ="SELECT id from tblutilizatori ";
+$sql3 ="SELECT Id from tblutilizatori ";
 $query3 = $dbh -> prepare($sql3);
 $query3->execute();
 $results3=$query3->fetchAll(PDO::FETCH_OBJ);
 $utilizatoriactivi=$query3->rowCount();
 ?>
 <h3><?php echo htmlentities($utilizatoriactivi);?></h3>
-Utilizatori
+UTILIZATORI
 </div>
+</a>
 </div>
 
 <div class="col-md-3 col-sm-3 col-xs-6">
-<div class="alert alert-danger back-widget-set text-center">
-<i class="fa-solid fa-user-pen fa-5x"></i>
+<a href="lista-camere.php">
+<div class="alert alert-warning back-widget-set text-center">
+<i class="fa-solid fa-door-closed fa-5x"></i>
 <?php 
-$sql3 ="SELECT id from tblutilizatori ";
+$sql3 ="SELECT id from tblcamere ";
 $query3 = $dbh -> prepare($sql3);
 $query3->execute();
 $results3=$query3->fetchAll(PDO::FETCH_OBJ);
 $utilizatoriactivi=$query3->rowCount();
 ?>
 <h3><?php echo htmlentities($utilizatoriactivi);?></h3>
-Utilizatori
+CAMERE
+</div>
+</a>
 </div>
 </div>
 </div>
-
 
 <?php include('includes/footer.php');?>
 
