@@ -26,14 +26,15 @@ $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
 
-
+$_SESSION['msg'] = "Contul dumneavoastra a fost inregistrat. Pentru activarea contului verificati-va e-mailul.";
+header('location:index.php');
 
                 // TRIMITERE  EMAIL 
                     $subject = "Activarea cont Casa Thea";
                     $message = "Contul dumneavoastra a fos creat.";
                     $message = 'Dragă '.$nume.',';
                     $message .= '<br><br>Îți mulțumim pentru crearea unui cont pe site-ul nostru! Pentru a-ți activa contul, te rugăm să apeși pe link-ul de mai jos:';
-                    $message .= '<br><br><a href="https://casathea.000webhostapp.com/activare.php?email=' . $email .'&amp;activation_code='.$activation_code.'">Link activare cont</a>';
+                    $message .= '<br><br><a href="http://localhost/hotel/activare.php?email=' . $email .'&amp;activation_code='.$activation_code.'">Link activare cont</a>';
                     $message .= '<br><br>După activare, vei putea să îți configurezi profilul și să începi să utilizezi site-ul nostru.';
                     $message .= '<br><br>Dacă nu ai creat acest cont, te rugăm să ignori acest email.';
                     $message .= '<br><br>Cu stima,';
@@ -43,9 +44,7 @@ if($lastInsertId)
                     $headers .= 'From: noreplay@casathea.ro' . "\r\n";
 
                     if (mail($email, $subject, $message, $headers)) {
-                        $_SESSION['msg'] = "Contul dumneavoastra a fost inregistrat. Pentru activarea contului verificati adresa de e-mail.";
-                        header('location:index.php');
-                        exit();
+                        echo "<script>alert('Email-ul a fost trimis cu succes.');</script>";
                     } else {
                         echo "<script>alert('Eroare la trimiterea email-ului.');</script>";
                     }
@@ -78,18 +77,42 @@ echo "<script>alert('Ceva nu a mers bine. Mai incearca o data.');</script>";
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <script src="https://kit.fontawesome.com/78d47f6922.js" crossorigin="anonymous"></script>
 
+
 <script type="text/javascript">
-function valid()
-{
-if(document.signup.password.value!= document.signup.confirmpassword.value)
-{
-alert("Parolele introduse nu coincid!");
-document.signup.confirmpassword.focus();
-return false;
-}
-return true;
+function valid() {
+    var password = document.signup.password.value;
+    var confirmPassword = document.signup.confirmpassword.value;
+
+    if (password.length < 8) {
+        alert("Parola trebuie să aibă cel puțin 8 caractere!");
+        document.signup.password.focus();
+        return false;
+    }
+
+    var uppercaseRegex = /^(?=.*[A-Z])/;
+    if (!uppercaseRegex.test(password)) {
+        alert("Parola trebuie să conțină cel puțin o literă majusculă!");
+        document.signup.password.focus();
+        return false;
+    }
+
+    var specialCharRegex = /^(?=.*[.@#$&])/;
+    if (!specialCharRegex.test(password)) {
+        alert("Parola trebuie să conțină cel puțin unul dintre caracterele speciale (. @ # $ & )!");
+        document.signup.password.focus();
+        return false;
+    }
+
+    if (password != confirmPassword) {
+        alert("Parolele introduse nu coincid!");
+        document.signup.confirmpassword.focus();
+        return false;
+    }
+
+    return true;
 }
 </script>
+
 <script>
 function checkAvailability() {
 $("#loaderIcon").show();
@@ -145,8 +168,8 @@ error:function (){}
 
 <div class="form-group">
 <input class="form-control"  type="password" name="confirmpassword" placeholder="Confirma parola" autocomplete="off" required  />
-</div>
-                               
+<p><span style="color:red"> Parola trebuie sa contina minim 8 caractere, o majuscula si un caracter special.</span></p> 
+</div>                             
 <button type="submit" name="signup" class="btn btn-danger" id="submit">Inregistrare </button>
 
                                     </form>
